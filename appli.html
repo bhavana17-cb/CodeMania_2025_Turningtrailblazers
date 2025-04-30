@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeSpace - Women's Incident Reporting</title>
+    <style>
+        :root {
+            --primary: #8e44ad;
+            --secondary: #9b59b6;
+            --light: #f5eef8;
+            --dark: #2c3e50;
+            --danger: #e74c3c;
+            --success: #2ecc71;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        nav ul li a:hover {
+            opacity: 0.8;
+        }
+        
+        .auth-buttons button {
+            background-color: white;
+            color: var(--primary);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 1rem;
+            font-weight: 600;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+        
+        .feature-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .report-form {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+        
+        .report-form h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-group .checkbox-group {
+            display: flex;
+            align-items: center;
+        }
+        
+        .form-group .checkbox-group input {
+            width: auto;
+            margin-right: 0.5rem;
+        }
+        
+        .emergency-btn {
+            background-color: var(--danger);
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+            transition: background-color 0.3s;
+        }
+        
+        .emergency-btn:hover {
+            background-color: #c0392b;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        .resources {
+            margin: 3rem 0;
+        }
+        
+        .resources h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .resource-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .resource-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .resource-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        
+        .resource-content {
+            padding: 1.5rem;
+        }
+        
+        .resource-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .resource-content a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Dashboard styles */
+        .dashboard {
+            display: flex;
+            min-height: calc(100vh - 80px);
+        }
+        
+        .sidebar {
+            width: 250px;
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem 0;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .sidebar-menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 2rem;
+            transition: background-color 0.3s;
+        }
+        
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+        }
+        
+        .reports-list {
+            margin-top: 2rem;
+        }
+        
+        .report-item {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 1rem;
+        }
+        
+        .report-item h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .report-meta {
+            display: flex;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .report-meta span {
+            margin-right: 1.5rem;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status.pending {
+            background-color: #f39c12;
+            color: white;
+        }
+        
+        .status.in-progress {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .status.resolved {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+            
+            .auth-buttons {
+                margin-top: 1rem;
+            }
+            
+            .dashboard {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                padding: 1rem 0;
+            }
+            
+            .sidebar-menu {
+                display: flex;
+                overflow-x: auto;
+                padding: 0 1rem;
+            }
+            
+            .sidebar-menu li {
+                margin-bottom: 0;
+                margin-right: 1rem;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Landing Page -->
+    <div id="landing-page">
+        <header>
+            <div class="logo">SafeSpace</div>
+            <nav>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#report">Report Incident</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button id="login-btn">Login</button>
+                <button id="signup-btn">Sign Up</button>
+            </div>
+        </header>
+
+        <div class="container">
+            <section class="hero">
+                <h1>A Safe Space for Women to Report Incidents</h1>
+                <p>SafeSpace provides a confidential and secure platform for women to report incidents of harassment, abuse, or discrimination. Our mission is to empower women with support and resources when they need it most.</p>
+                <a href="#report" class="btn">Report an Incident</a>
+            </section>
+
+            <section id="features" class="features">
+                <div class="feature-card">
+                    <h3>Secure & Confidential</h3>
+                    <p>All reports are encrypted and stored securely. Your identity remains confidential unless you choose to disclose it.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>24/7 Support</h3>
+                    <p>Access to counselors and legal advisors at any time. We're here to help whenever you need us.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Case Tracking</h3>
+                    <p>Track the progress of your report and get updates on actions taken. You're never left in the dark.</p>
+                </div>
+            </section>
+
+            <section id="report" class="report-form">
+                <h2>Report an Incident</h2>
+                <form id="incident-form">
+                    <button type="button" class="emergency-btn">EMERGENCY - Get Immediate Help</button>
+                    
+                    <div class="form-group">
+                        <label for="incident-type">Type of Incident</label>
+                        <select id="incident-type" required>
+                            <option value="">Select incident type</option>
+                            <option value="harassment">Harassment</option>
+                            <option value="abuse">Abuse</option>
+                            <option value="discrimination">Discrimination</option>
+                            <option value="assault">Assault</option>
+                            <option value="stalking">Stalking</option>
+                            <option value="cyber-crime">Cyber Crime</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="incident-date">Date of Incident</label>
+                        <input type="date" id="incident-date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="incident-location">Location</label>
+                        <input type="text" id="incident-location" placeholder="Where did it happen?" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="incident-description">Description</label>
+                        <textarea id="incident-description" placeholder="Please describe what happened in as much detail as you're comfortable sharing..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="evidence">Upload Evidence (photos, screenshots, etc.)</label>
+                        <input type="file" id="evidence" multiple>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Privacy Options</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="anonymous" checked>
+                            <label for="anonymous">Report anonymously</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="contact-permission">
+                            <label for="contact-permission">I give permission to be contacted about this report</label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Submit Report</button>
+                </form>
+            </section>
+
+            <section id="resources" class="resources">
+                <h2>Resources & Support</h2>
+                <div class="resource-list">
+                    <div class="resource-card">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Counseling">
+                        <div class="resource-content">
+                            <h3>Counseling Services</h3>
+                            <p>Professional counseling and mental health support for survivors of trauma.</p>
+                            <a href="#">Find a Counselor</a>
+                        </div>
+                    </div>
+                    <div class="resource-card">
+                        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Legal Aid">
+                        <div class="resource-content">
+                            <h3>Legal Assistance</h3>
+                            <p>Connect with lawyers who specialize in women's rights and gender-based violence.</p>
+                            <a href="#">Legal Resources</a>
+                        </div>
+                    </div>
+                    <div class="resource-card">
+                        <img src="https://images.unsplash.com/photo-1521791055366-0d553872125f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Support Groups">
+                        <div class="resource-content">
+                            <h3>Support Groups</h3>
+                            <p>Join communities of survivors for shared experiences and healing.</p>
+                            <a href="#">Find a Group</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer id="about">
+            <h3>SafeSpace</h3>
+            <p>Empowering women through secure reporting and comprehensive support.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+                <a href="#">FAQ</a>
+            </div>
+            <p>&copy; 2023 SafeSpace. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Login to Your Account</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="submit-btn">Login</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem;">Don't have an account? <a href="#" id="switch-to-signup">Sign up</a></p>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signup-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Create Your Account</h2>
+            <form id="signup-form">
+                <div class="form-group">
+                    <label for="signup-name">Full Name</label>
+                    <input type="text" id="signup-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm">Confirm Password</label>
+                    <input type="password" id="signup-confirm" required>
+                </div>
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="terms-agree" required>
+                    <label for="terms-agree">I agree to the Terms of Service and Privacy Policy</label>
+                </div>
+                <button type="submit" class="submit-btn">Create Account</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem;">Already have an account? <a href="#" id="switch-to-login">Login</a></p>
+        </div>
+    </div>
+
+    <!-- User Dashboard (hidden by default) -->
+    <div id="dashboard-page" style="display: none;">
+        <header>
+            <div class="logo">SafeSpace</div>
+            <nav>
+                <ul>
+                    <li><a href="#" id="dashboard-link">Dashboard</a></li>
+                    <li><a href="#" id="new-report-link">New Report</a></li>
+                    <li><a href="#" id="resources-link">Resources</a></li>
+                    <li><a href="#" id="profile-link">Profile</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button id="logout-btn">Logout</button>
+            </div>
+        </header>
+
+        <div class="dashboard">
+            <div class="sidebar">
+                <ul class="sidebar-menu">
+                    <li><a href="#" class="active" id="sidebar-dashboard">Dashboard</a></li>
+                    <li><a href="#" id="sidebar-new-report">New Report</a></li>
+                    <li><a href="#" id="sidebar-my-reports">My Reports</a></li>
+                    <li><a href="#" id="sidebar-support">Get Support</a></li>
+                    <li><a href="#" id="sidebar-resources">Resources</a></li>
+                    <li><a href="#" id="sidebar-settings">Settings</a></li>
+                </ul>
+            </div>
+
+            <div class="main-content">
+                <h2>Welcome back, <span id="user-greeting">User</span></h2>
+                
+                <div class="reports-list">
+                    <h3>Your Recent Reports</h3>
+                    
+                    <div class="report-item">
+                        <h3>Workplace Harassment</h3>
+                        <div class="report-meta">
+                            <span>Reported on: 15 Oct 2023</span>
+                            <span>Status: <span class="status in-progress">In Progress</span></span>
+                        </div>
+                        <p>Reported ongoing harassment from a colleague at work. Submitted evidence including emails and witness statements.</p>
+                        <a href="#" class="btn" style="padding: 0.5rem 1rem; font-size: 0.9rem;">View Details</a>
+                    </div>
+                    
+                    <div class="report-item">
+                        <h3>Public Transportation Incident</h3>
+                        <div class="report-meta">
+                            <span>Reported on: 5 Oct 2023</span>
+                            <span>Status: <span class="status resolved">Resolved</span></span>
+                        </div>
+                        <p>Reported inappropriate behavior on the subway. Authorities were notified and the individual was identified.</p>
+                        <a href="#" class="btn" style="padding: 0.5rem 1rem; font-size: 0.9rem;">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const landingPage = document.getElementById('landing-page');
+        const dashboardPage = document.getElementById('dashboard-page');
+        const loginBtn = document.getElementById('login-btn');
+        const signupBtn = document.getElementById('signup-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+        const loginModal = document.getElementById('login-modal');
+        const signupModal = document.getElementById('signup-modal');
+        const closeModalBtns = document.querySelectorAll('.close-modal');
+        const switchToSignup = document.getElementById('switch-to-signup');
+        const switchToLogin = document.getElementById('switch-to-login');
+        const emergencyBtn = document.querySelector('.emergency-btn');
+        
+        // Show Login Modal
+        loginBtn.addEventListener('click', () => {
+            loginModal.style.display = 'flex';
+        });
+        
+        // Show Signup Modal
+        signupBtn.addEventListener('click', () => {
+            signupModal.style.display = 'flex';
+        });
+        
+        // Close Modals
+        closeModalBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                loginModal.style.display = 'none';
+                signupModal.style.display = 'none';
+            });
+        });
+        
+        // Switch between Login and Signup modals
+        switchToSignup.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'none';
+            signupModal.style.display = 'flex';
+        });
+        
+        switchToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            signupModal.style.display = 'none';
+            loginModal.style.display = 'flex';
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+            if (e.target === signupModal) {
+                signupModal.style.display = 'none';
+            }
+        });
+        
+        // Emergency button
+        emergencyBtn.addEventListener('click', () => {
+            alert('Connecting you to emergency services...\n\nIf you\'re in immediate danger, please call your local emergency number.');
+            // In a real implementation, this would connect to emergency services
+        });
+        
+        // Form submissions (simplified for demo)
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Simulate successful login
+            landingPage.style.display = 'none';
+            dashboardPage.style.display = 'block';
+            loginModal.style.display = 'none';
+        });
+        
+        document.getElementById('signup-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Simulate successful signup
+            landingPage.style.display = 'none';
+            dashboardPage.style.display = 'block';
+            signupModal.style.display = 'none';
+        });
+        
+        document.getElementById('incident-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your report. It has been submitted securely and our team will review it shortly.');
+            // Reset form
+            e.target.reset();
+        });
+        
+        // Logout
+        logoutBtn.addEventListener('click', () => {
+            dashboardPage.style.display = 'none';
+            landingPage.style.display = 'block';
+        });
+        
+        // Dashboard navigation would be implemented here in a real app
+    </script>
+    from flask import Flask, request, jsonify, render_template, redirect, url_for, session
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
+import os
+from datetime import datetime
+import uuid
+
+app = Flask(_name_)
+app.secret_key = 'your-secret-key-here'  # Change this in production
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///safespace.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['UPLOAD_FOLDER'] = 'uploads/'
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max upload
+
+# Ensure upload directory exists
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
+db = SQLAlchemy(app)
+
+# Database Models
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    public_id = db.Column(db.String(50), unique=True)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password = db.Column(db.String(200), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    is_admin = db.Column(db.Boolean, default=False)
+    reports = db.relationship('Report', backref='user', lazy=True)
+
+class Report(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    public_id = db.Column(db.String(50), unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)  # Nullable for anonymous reports
+    incident_type = db.Column(db.String(50), nullable=False)
+    date_occurred = db.Column(db.Date, nullable=False)
+    location = db.Column(db.String(200), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    is_anonymous = db.Column(db.Boolean, default=True)
+    contact_permission = db.Column(db.Boolean, default=False)
+    status = db.Column(db.String(20), default='pending')  # pending, in_progress, resolved
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
+    evidences = db.relationship('Evidence', backref='report', lazy=True)
+
+class Evidence(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    report_id = db.Column(db.Integer, db.ForeignKey('report.id'), nullable=False)
+    filename = db.Column(db.String(200), nullable=False)
+    filepath = db.Column(db.String(300), nullable=False)
+    uploaded_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+class SupportResource(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    category = db.Column(db.String(50), nullable=False)
+    url = db.Column(db.String(300))
+    contact_info = db.Column(db.String(200))
+    is_approved = db.Column(db.Boolean, default=False)
+
+# Helper functions
+def allowed_file(filename):
+    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'pdf', 'doc', 'docx', 'mp4', 'mov'}
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+def generate_public_id():
+    return str(uuid.uuid4())
+
+# Routes
+@app.route('/')
+def home():
+    if 'user_id' in session:
+        return redirect(url_for('dashboard'))
+    return render_template('index.html')
+
+@app.route('/dashboard')
+def dashboard():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    
+    user = User.query.get(session['user_id'])
+    reports = Report.query.filter_by(user_id=user.id).order_by(Report.created_at.desc()).limit(5).all()
+    return render_template('dashboard.html', user=user, reports=reports)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+        
+        user = User.query.filter_by(email=email).first()
+        
+        if not user or not check_password_hash(user.password, password):
+            return jsonify({'message': 'Invalid credentials'}), 401
+        
+        session['user_id'] = user.id
+        return jsonify({'message': 'Login successful', 'redirect': url_for('dashboard')})
+    
+    return render_template('login.html')
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        
+        if User.query.filter_by(email=email).first():
+            return jsonify({'message': 'Email already exists'}), 400
+        
+        hashed_password = generate_password_hash(password, method='sha256')
+        
+        new_user = User(
+            public_id=generate_public_id(),
+            name=name,
+            email=email,
+            password=hashed_password
+        )
+        
+        db.session.add(new_user)
+        db.session.commit()
+        
+        session['user_id'] = new_user.id
+        return jsonify({'message': 'Account created', 'redirect': url_for('dashboard')})
+    
+    return render_template('signup.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None)
+    return redirect(url_for('home'))
+
+@app.route('/report', methods=['GET', 'POST'])
+def report_incident():
+    if request.method == 'POST':
+        # Get form data
+        incident_type = request.form.get('incident_type')
+        date_occurred = datetime.strptime(request.form.get('date_occurred'), '%Y-%m-%d').date()
+        location = request.form.get('location')
+        description = request.form.get('description')
+        is_anonymous = request.form.get('anonymous') == 'on'
+        contact_permission = request.form.get('contact_permission') == 'on'
+        
+        # Get user ID if logged in and not anonymous
+        user_id = None
+        if 'user_id' in session and not is_anonymous:
+            user_id = session['user_id']
+        
+        # Create new report
+        new_report = Report(
+            public_id=generate_public_id(),
+            user_id=user_id,
+            incident_type=incident_type,
+            date_occurred=date_occurred,
+            location=location,
+            description=description,
+            is_anonymous=is_anonymous,
+            contact_permission=contact_permission
+        )
+        
+        db.session.add(new_report)
+        db.session.commit()
+        
+        # Handle file uploads
+        if 'evidence' in request.files:
+            files = request.files.getlist('evidence')
+            for file in files:
+                if file and allowed_file(file.filename):
+                    filename = secure_filename(file.filename)
+                    unique_filename = f"{generate_public_id()}_{filename}"
+                    filepath = os.path.join(app.config['UPLOAD_FOLDER'], unique_filename)
+                    file.save(filepath)
+                    
+                    new_evidence = Evidence(
+                        report_id=new_report.id,
+                        filename=filename,
+                        filepath=filepath
+                    )
+                    db.session.add(new_evidence)
+        
+        db.session.commit()
+        
+        return jsonify({
+            'message': 'Report submitted successfully',
+            'report_id': new_report.public_id
+        })
+    
+    return render_template('report.html')
+
+@app.route('/reports')
+def user_reports():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    
+    user = User.query.get(session['user_id'])
+    reports = Report.query.filter_by(user_id=user.id).order_by(Report.created_at.desc()).all()
+    return render_template('reports.html', reports=reports)
+
+@app.route('/report/<public_id>')
+def view_report(public_id):
+    report = Report.query.filter_by(public_id=public_id).first_or_404()
+    
+    # Check if user has permission to view this report
+    if 'user_id' in session:
+        if report.user_id != session['user_id'] and not User.query.get(session['user_id']).is_admin:
+            return "Unauthorized", 403
+    elif report.user_id is not None:  # Report is not anonymous and user is not logged in
+        return redirect(url_for('login'))
+    
+    return render_template('view_report.html', report=report)
+
+@app.route('/resources')
+def resources():
+    resources = SupportResource.query.filter_by(is_approved=True).all()
+    return render_template('resources.html', resources=resources)
+
+@app.route('/emergency')
+def emergency():
+    # In a real implementation, this would connect to emergency services
+    return jsonify({
+        'message': 'Emergency assistance requested',
+        'note': 'If you are in immediate danger, please call your local emergency number.'
+    })
+
+# API Endpoints
+@app.route('/api/reports', methods=['GET'])
+def get_reports():
+    if 'user_id' not in session:
+        return jsonify({'message': 'Unauthorized'}), 401
+    
+    user = User.query.get(session['user_id'])
+    reports = Report.query.filter_by(user_id=user.id).all()
+    
+    reports_data = []
+    for report in reports:
+        reports_data.append({
+            'id': report.public_id,
+            'incident_type': report.incident_type,
+            'date_occurred': report.date_occurred.isoformat(),
+            'location': report.location,
+            'status': report.status,
+            'created_at': report.created_at.isoformat()
+        })
+    
+    return jsonify(reports_data)
+
+@app.route('/api/report/<public_id>', methods=['GET'])
+</body>
+</html>
